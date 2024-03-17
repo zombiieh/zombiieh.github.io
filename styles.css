@@ -1,115 +1,132 @@
-    table,
-    th,
-    td {
-        /* border: 1px solid rgb(58, 49, 216); */
-        border-collapse: collapse;
-    }
+table,
+th,
+td {
+    /* border: 1px solid rgb(58, 49, 216); */
+    border-collapse: collapse;
+}
 
-    table {
-        width: 100%;
-    }
+table {
+    width: 100%;
+}
 
-    body {
-        background-color: #131215;
-        color: #ebe9fc;
-        display: flex;
-        flex-direction: column;
-        padding: 20px 100px 20px 100px;
-        gap: 30px;
-    }
+body {
+    background-color: #131215;
+    color: #ebe9fc;
+    display: flex;
+    flex-direction: column;
+    padding: 20px 100px 20px 100px;
+    gap: 30px;
+}
 
-    header {
-        height: 50px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
+header {
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 
-    * {
-        font-family: "DM Sans", sans-serif;
-        font-weight: 400;
-    }
+* {
+    font-family: "DM Sans", sans-serif;
+    font-weight: 400;
+}
 
-    #head-title {
-        font-family: "Inter", sans-serif;
-        font-weight: 600;
-        font-size: 28px;
-    }
+#head-title {
+    font-family: "Inter", sans-serif;
+    font-weight: 600;
+    font-size: 28px;
+}
 
-    tr:nth-child(even) {
-        background: rgba(51, 51, 54, 0.4)
-    }
+tr:nth-child(even) {
+    background: rgba(51, 51, 54, 0.4)
+}
 
-    tr:nth-child(odd) {
-        background: rgba(51, 51, 54, 0.2)
-    }
+tr:nth-child(odd) {
+    background: rgba(51, 51, 54, 0.2)
+}
 
-    /* tr { background-color:rgb(66, 59, 50); } */
 
-    tr {
-        width: 100%;
-        text-align: center;
-        height: 120px;
-    }
+tr {
+    width: 100%;
+    text-align: center;
+    height: 120px;
+}
 
-    th {
-        font-weight: 600;
-        font-family: "Inter", sans-serif;
-    }
+th {
+    font-weight: 600;
+    font-family: "Inter", sans-serif;
+}
 
-    img {
-        border-radius: 0.25em;
-        height: 100%;
-    }
+img {
+    border-radius: 0.25em;
+    height: 100%;
+}
 
-    *::-webkit-scrollbar {
-        width: 12px;
-        background-color: rgba(51, 51, 54, 0.3);
-    }
+*::-webkit-scrollbar {
+    width: 12px;
+    background-color: rgba(51, 51, 54, 0.3);
+}
 
-    *::-webkit-scrollbar-thumb {
-        background-color: rgba(51, 51, 54, 1);
-        border-radius: 0.25em;
-        width: 12px;
-        border: 0px solid #ffffff;
-        display: flex;
-        align-items: center;
-    }
+*::-webkit-scrollbar-thumb {
+    background-color: rgba(51, 51, 54, 1);
+    border-radius: 0.25em;
+    width: 12px;
+    border: 0px solid #ffffff;
+    display: flex;
+    align-items: center;
+}
 
-    #source,
-    #discord {
-        width: 24px;
-        height: 24px;
-        filter: invert(82%) sepia(0%) saturate(3364%) hue-rotate(275deg) brightness(83%) contrast(85%);
-        transition: all ease-in-out .15s;
-    }
+.link {
+    width: 24px;
+    height: 24px;
+    filter: invert(82%) sepia(0%) saturate(3364%) hue-rotate(275deg) brightness(83%) contrast(85%);
+    transition: all ease-in-out .15s;
+}
 
-    #source:hover,
-    #discord:hover {
-        filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(159deg) brightness(106%) contrast(101%);
-    }
+.link:hover {
+    filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(159deg) brightness(106%) contrast(101%);
+}
 
-    #links {
-        display: flex;
-        gap: 25px;
-    }
+#links {
+    display: flex;
+    gap: 25px;
+}
 
-    #logo {
-        width: 50px;
-        height: 50px;
-    }
+#logo {
+    width: 50px;
+    height: 50px;
+}
 
-    #branding {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 10px;
-    }
+#branding {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
 
-    #top-cell-left {
-        border-top-left-radius: 0.25em;
-    }
+#top-cell-left {
+    border-top-left-radius: 0.25em;
+}
 
-    #top-cell-right {
-        border-top-right-radius: 0.25em;
-    }
+#top-cell-right {
+    border-top-right-radius: 0.25em;
+}
+
+#searchInput {
+    padding: 20px 20px 20px 20px;
+    border-radius: 0.55em;
+    background-color: rgb(33, 33, 34);
+    border: none;
+    color: #FFFFFF;
+    transition: all ease-in-out .15s;
+    outline: none;
+    border: 1px solid rgb(33, 33, 34);
+}
+
+#searchInput:focus {
+    border: 1px solid rgb(71, 71, 74);
+}
+
+::placeholder {
+    color: #8A8F98;
+    opacity: 1;
+}

@@ -1816,30 +1816,59 @@ const characters = [
 document.addEventListener("DOMContentLoaded", (event) => {
     var tableBody = document.querySelector('table tbody');
 
-    characters.forEach(function (content) {
-        // Create a new table row
-        var newRow = document.createElement('tr');
+    function populateTable(characters) {
+        tableBody.innerHTML = ''; // Clear existing table rows
 
-        // Create a new table cell for the content
-        var newCellContent = document.createElement('td');
-        newCellContent.textContent = content;
+        var tableHeader = document.createElement('tr');
+        var thChar = document.createElement('th');
+        thChar.textContent = 'Char';
+        thChar.style.fontSize = '50px';
+        tableHeader.appendChild(thChar);
+        var thImage = document.createElement('th');
+        thImage.textContent = 'Image';
+        thImage.style.fontSize = '50px';
+        tableHeader.appendChild(thImage);
+        tableBody.appendChild(tableHeader);
 
-        // Create a new table cell for the image
-        var newCellImage = document.createElement('td');
-        var img = document.createElement('img');
-        img.src = "Mugen Kumite Character List_files/image(" + characters.indexOf(content) + ").png";
-        img.alt = content;
-        newCellImage.appendChild(img);
 
-        if (characters.indexOf(content) == 0) {
-            img.src = "Mugen Kumite Character List_files/image.png";
-        }
+        characters.forEach(function (content) {
+            // Create a new table row
+            var newRow = document.createElement('tr');
 
-        // Append the new cells to the new row
-        newRow.appendChild(newCellContent);
-        newRow.appendChild(newCellImage);
+            // Create a new table cell for the content
+            var newCellContent = document.createElement('td');
+            newCellContent.textContent = content;
 
-        // Append the new row to the table body
-        tableBody.appendChild(newRow);
+            // Create a new table cell for the image
+            var newCellImage = document.createElement('td');
+            var img = document.createElement('img');
+            img.src = "Mugen Kumite Character List_files/image(" + characters.indexOf(content) + ").png";
+            img.alt = content;
+            newCellImage.appendChild(img);
+
+            if (characters.indexOf(content) == 0) {
+                img.src = "Mugen Kumite Character List_files/image.png";
+            }
+
+            // Append the new cells to the new row
+            newRow.appendChild(newCellContent);
+            newRow.appendChild(newCellImage);
+
+            // Append the new row to the table body
+            tableBody.appendChild(newRow);
+        });
+    }
+
+    // Initial population of the table
+    populateTable(characters);
+
+    // Search function
+    document.getElementById("searchInput").addEventListener("keyup", function () {
+        var searchTerm = this.value.toLowerCase();
+        var filteredCharacters = characters.filter(function (character) {
+            return character.toLowerCase().includes(searchTerm);
+        });
+        populateTable(filteredCharacters);
     });
 });
+
