@@ -1842,12 +1842,12 @@ document.addEventListener("DOMContentLoaded", (event) => {
             // Create a new table cell for the image
             var newCellImage = document.createElement('td');
             var img = document.createElement('img');
-            img.src = "Mugen Kumite Character List_files/image(" + characters.indexOf(content) + ").png";
+            img.src = "res/image(" + characters.indexOf(content) + ").png";
             img.alt = content;
             newCellImage.appendChild(img);
 
             if (characters.indexOf(content) == 0) {
-                img.src = "Mugen Kumite Character List_files/image.png";
+                img.src = "res/image.png";
             }
 
             // Append the new cells to the new row
