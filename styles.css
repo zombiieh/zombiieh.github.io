@@ -1,21 +1,25 @@
-table,
-th,
-td {
-    /* border: 1px solid rgb(58, 49, 216); */
-    border-collapse: collapse;
-}
-
-table {
-    width: 100%;
+:root {
+    --text-color: #e9ebec;
+    --main-bg-color: #0d0d0d;
+    --secondary-bg-color: #212121;
+    --placeholder-color: #8A8F98;
+    --table-odd-color: rgb(28, 28, 28);
+    --table-even-color: rgb(23, 23, 23);
 }
 
 body {
-    background-color: #131215;
+    background-color: var(--main-bg-color);
     color: #ebe9fc;
     display: flex;
     flex-direction: column;
     padding: 20px 100px 20px 100px;
     gap: 30px;
+}
+
+table,
+th,
+td {
+    border-collapse: collapse;
 }
 
 header {
@@ -37,12 +41,11 @@ header {
 }
 
 tr:nth-child(even) {
-    background: rgba(51, 51, 54, 0.4)
+    background: var(--table-even-color);
 }
 
 tr:nth-child(odd) {
-    background: rgba(51, 51, 54, 0.2)
-}
+    background: var(--table-odd-color);}
 
 
 tr {
@@ -54,6 +57,7 @@ tr {
 th {
     font-weight: 600;
     font-family: "Inter", sans-serif;
+    font-size: 50px;
 }
 
 img {
@@ -70,7 +74,7 @@ img {
     background-color: rgba(51, 51, 54, 1);
     border-radius: 0.25em;
     width: 12px;
-    border: 0px solid #ffffff;
+    border: 0px solid var(--text-color);
     display: flex;
     align-items: center;
 }
@@ -103,23 +107,16 @@ img {
     gap: 10px;
 }
 
-#top-cell-left {
-    border-top-left-radius: 0.25em;
-}
-
-#top-cell-right {
-    border-top-right-radius: 0.25em;
-}
-
 #searchInput {
     padding: 20px 20px 20px 20px;
     border-radius: 0.55em;
-    background-color: rgb(33, 33, 34);
+    background-color: var(--secondary-bg-color);
+    border: 1px solid var(--secondary-bg-color);
     border: none;
-    color: #FFFFFF;
+    color: var(--text-color);
     transition: all ease-in-out .15s;
     outline: none;
-    border: 1px solid rgb(33, 33, 34);
+    width: 100%;
 }
 
 #searchInput:focus {
@@ -127,6 +124,28 @@ img {
 }
 
 ::placeholder {
-    color: #8A8F98;
+    color: var(--placeholder-color);
     opacity: 1;
+}
+
+#table-inputs {
+    width: 100%;
+    display: flex;
+    gap: 25px;
+}
+
+#sort {
+    width: 100px;
+    background-color: var(--secondary-bg-color);
+    border: none;
+    color: var(--text-color);
+    border-radius: 0.55em;
+    text-align: center;
+    transition: all ease-in-out .15s;
+}
+
+select#sort {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
 }
