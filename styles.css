@@ -144,8 +144,36 @@ img {
     transition: all ease-in-out .15s;
 }
 
+#sort:hover {
+    background-color: rgb(43, 43, 43);
+}
+
 select#sort {
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
+}
+
+#tabs {
+    display: flex;
+    gap: 15px;
+}
+
+#tabs > a > button {
+    background-color: var(--secondary-bg-color);
+    border: none;
+    color: var(--text-color);
+    padding: 10px 20px 10px 20px;
+    height: 50px;
+    border-radius: 0.55em;
+    transition: all ease-in-out .15s;
+    cursor: pointer;
+}
+
+#tabs > a > button:hover {
+    background-color: rgb(43, 43, 43);
+}
+
+*:focus {
+    outline: none;
 }
