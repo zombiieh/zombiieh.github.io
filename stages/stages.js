@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", async (event) => {
 
             // Create cell for stage image
             const newCellImage = document.createElement('td');
-            const imgSrc = "../res/stage/" + stage["Picture"];
+            const imgSrc = "../res/stages/" + stage["Picture"];
 
             try {
                 const response = await fetch(imgSrc, { method: 'HEAD' });
