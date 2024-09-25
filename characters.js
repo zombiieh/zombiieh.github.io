@@ -106,7 +106,7 @@ document.addEventListener("DOMContentLoaded", async (event) => {
         characterData = await response.json();
         console.log(characterData);
 
-        // Sort by "ratio" after fetching data
+    // Sort by "ratio" after fetching data
         sortCharacters("ratio");
     } catch (error) {
         console.error("Error fetching character data:", error);
