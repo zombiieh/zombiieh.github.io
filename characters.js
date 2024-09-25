@@ -103,7 +103,7 @@ document.addEventListener("DOMContentLoaded", async (event) => {
         characterData = await response.json();
         console.log(characterData);
 
-        // Sort by "ratio" after fetching data
+        // Sort by "ratio" after fetching data and populate the table
         sortCharacters("ratio");
     } catch (error) {
         console.error("Error fetching character data:", error);
@@ -120,3 +120,4 @@ document.addEventListener("DOMContentLoaded", async (event) => {
         const sortBy = this.value;
         sortCharacters(sortBy);
     });
+});
