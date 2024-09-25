@@ -105,7 +105,9 @@ document.addEventListener("DOMContentLoaded", async (event) => {
         const response = await fetch("https://raw.githubusercontent.com/zombiieh/MugenKumiteStats/main/CharList.json");
         characterData = await response.json();
         console.log(characterData);
-        populateTable(characterData);
+
+        // Sort by "ratio" after fetching data
+        sortCharacters("ratio");
     } catch (error) {
         console.error("Error fetching character data:", error);
     }
