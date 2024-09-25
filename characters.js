@@ -71,19 +71,16 @@ document.addEventListener("DOMContentLoaded", async (event) => {
         const sortedCharacters = Object.fromEntries(Object.entries(characterData).sort(([, a], [, b]) => {
             switch (sortBy) {
                 case "wins":
-                    // Sort by wins, if wins are equal, sort by losses
                     if (parseInt(a["Wins"]) !== parseInt(b["Wins"])) {
                         return parseInt(b["Wins"]) - parseInt(a["Wins"]); // Sort by wins descending
                     } else {
                         return parseInt(a["Losses"]) - parseInt(b["Losses"]); // Sort by losses ascending
                     }
                 case "ratio":
-                    // Sort by ratio
                     const ratioA = a["Ratio"] === "N/A" ? 0 : parseFloat(a["Ratio"]);
                     const ratioB = b["Ratio"] === "N/A" ? 0 : parseFloat(b["Ratio"]);
                     return ratioB - ratioA; // Sort by ratio descending
                 case "pb":
-                    // Sort by PB (assuming lower time is better)
                     const pbA = a["PB_Time"] === "N/A" ? 1000 : parseFloat(a["PB_Time"]);
                     const pbB = b["PB_Time"] === "N/A" ? 1000 : parseFloat(b["PB_Time"]);
                     return pbA - pbB; // Sort by PB ascending
@@ -106,7 +103,7 @@ document.addEventListener("DOMContentLoaded", async (event) => {
         characterData = await response.json();
         console.log(characterData);
 
-    // Sort by "ratio" after fetching data
+        // Sort by "ratio" after fetching data
         sortCharacters("ratio");
     } catch (error) {
         console.error("Error fetching character data:", error);
@@ -123,4 +120,3 @@ document.addEventListener("DOMContentLoaded", async (event) => {
         const sortBy = this.value;
         sortCharacters(sortBy);
     });
-});
