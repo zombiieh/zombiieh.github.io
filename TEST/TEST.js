@@ -44,7 +44,7 @@ document.addEventListener("DOMContentLoaded", async (event) => {
 
                     // Add character image
                     const img = document.createElement('img');
-                    img.src = `/res/${characterName}.png`;
+                    img.src = `res/${characterName}.png`;
                     img.alt = characterName || "Character Image";
                     img.style.maxWidth = '50px'; // Limit image size
                     img.style.marginLeft = '10px';
