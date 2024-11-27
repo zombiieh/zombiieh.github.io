@@ -29,32 +29,33 @@ document.addEventListener("DOMContentLoaded", async (event) => {
             // Create cell for Characters
             const newCellCharacters = document.createElement('td');
             const characters = user["Characters"];
-            
+
             if (Array.isArray(characters) && characters.length > 0) {
-                characters.forEach(character => {
+                characters.forEach(characterName => {
                     const charDiv = document.createElement('div');
+                    charDiv.style.display = 'flex';
+                    charDiv.style.alignItems = 'center';
+                    charDiv.style.marginBottom = '5px';
 
                     // Add character name
                     const charName = document.createElement('span');
-                    charName.textContent = character.name || "Unknown";
+                    charName.textContent = characterName;
                     charDiv.appendChild(charName);
 
-                    // Add character image if available
-                    if (character.image) {
-                        const img = document.createElement('img');
-                        img.src = "../res/" + character.name + ".png";
-                        img.alt = character.name || "Character Image";
-                        img.style.maxWidth = '100px'; // Limit image size
-                        img.style.marginLeft = '10px';
-                        charDiv.appendChild(img);
-                    }
+                    // Add character image
+                    const img = document.createElement('img');
+                    img.src = `/res/${characterName}.png`;
+                    img.alt = characterName || "Character Image";
+                    img.style.maxWidth = '50px'; // Limit image size
+                    img.style.marginLeft = '10px';
+                    charDiv.appendChild(img);
 
                     newCellCharacters.appendChild(charDiv);
                 });
             } else {
                 newCellCharacters.textContent = 'No characters listed';
             }
-            
+
             newRow.appendChild(newCellCharacters);
             tableBody.appendChild(newRow);
         }
