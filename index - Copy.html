@@ -35,6 +35,16 @@
 
   </header>
 
+  <div id="tabs">
+   <a href="/">
+     <button>Characters</button>
+    </a>
+    <a href="/stages">
+      <button>Stages</button>
+    </a>
+  </div>
+
+
   <div id="table-inputs">
     <input type="text" id="searchInput" placeholder="Character Name">
     <select id="sort" name="sort">
@@ -42,7 +52,7 @@
       <option value="pb">PB</option>
       <option value="wins">Wins</option>
       <option value="loss">Loss</option>
-      <option value="ratio">Ratio</option>
+      <option value="ratio" selected>Ratio</option> <!-- Set this option as the default -->
     </select>
   </div>
 
