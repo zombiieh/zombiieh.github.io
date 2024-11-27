@@ -64,7 +64,7 @@ document.addEventListener("DOMContentLoaded", async (event) => {
 
     // Fetch stage data
     try {
-        const response = await fetch("https://raw.githubusercontent.com/zombiieh/MugenKumiteStats/main/StageList.json");
+        const response = await fetch("https://raw.githubusercontent.com/zombiieh/MugenKumiteStats/main/TEST.json");
         stageData = await response.json();
         populateTable(stageData);
     } catch (error) {
