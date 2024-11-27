@@ -1,14 +1,15 @@
 document.addEventListener("DOMContentLoaded", async (event) => {
     const tableBody = document.querySelector('table tbody');
     const searchInput = document.getElementById("searchInput");
-    let stageData = [];
+    let userData = [];
 
     // Function to populate the table
-    async function populateTable(stages) {
+    async function populateTable(users) {
         tableBody.innerHTML = ''; // Clear existing table rows
 
+        // Create table headers
         const tableHeader = document.createElement('tr');
-        const headerTitles = ['Stage', 'Image'];
+        const headerTitles = ['Nickname', 'Characters'];
         headerTitles.forEach(title => {
             const th = document.createElement('th');
             th.textContent = title;
@@ -16,64 +17,75 @@ document.addEventListener("DOMContentLoaded", async (event) => {
         });
         tableBody.appendChild(tableHeader);
 
-        for (const key of Object.keys(stages)) {
-            const stage = stages[key];
+        for (const key of Object.keys(users)) {
+            const user = users[key];
             const newRow = document.createElement('tr');
 
-            // Create cell for stage name
-            const newCellChar = document.createElement('td');
-            newCellChar.textContent = key;
-            newRow.appendChild(newCellChar);
+            // Create cell for Nickname
+            const newCellNickname = document.createElement('td');
+            newCellNickname.textContent = user["Nickname"] || "Unknown";
+            newRow.appendChild(newCellNickname);
 
-            // Create cell for stage image
-            const newCellImage = document.createElement('td');
-            const imgSrc = "../res/stages/" + stage["Picture"];
+            // Create cell for Characters
+            const newCellCharacters = document.createElement('td');
+            const characters = user["Characters"];
+            
+            if (Array.isArray(characters) && characters.length > 0) {
+                characters.forEach(character => {
+                    const charDiv = document.createElement('div');
 
-            try {
-                const response = await fetch(imgSrc, { method: 'HEAD' });
-                if (response.ok) {
-                    const img = document.createElement('img');
-                    img.src = imgSrc;
-                    img.alt = key;
-                    img.style.maxWidth = '400px'; // Limit image size
-                    newCellImage.appendChild(img);
-                } else {
-                    newCellImage.textContent = 'Image not found';
-                }
-            } catch (error) {
-                // console.error("Error checking image existence:", error);
-                newCellImage.textContent = 'Image not found';
+                    // Add character name
+                    const charName = document.createElement('span');
+                    charName.textContent = character.name || "Unknown";
+                    charDiv.appendChild(charName);
+
+                    // Add character image if available
+                    if (character.image) {
+                        const img = document.createElement('img');
+                        img.src = "../res/characters/" + character.image;
+                        img.alt = character.name || "Character Image";
+                        img.style.maxWidth = '100px'; // Limit image size
+                        img.style.marginLeft = '10px';
+                        charDiv.appendChild(img);
+                    }
+
+                    newCellCharacters.appendChild(charDiv);
+                });
+            } else {
+                newCellCharacters.textContent = 'No characters listed';
             }
-
-            newRow.appendChild(newCellImage);
+            
+            newRow.appendChild(newCellCharacters);
             tableBody.appendChild(newRow);
         }
     }
 
-    // Function to filter stages based on search term
-    function filterStages(searchTerm) {
-        const filteredStages = Object.keys(stageData).filter(key => {
-            return key.toLowerCase().includes(searchTerm.toLowerCase());
+    // Function to filter users based on search term
+    function filterUsers(searchTerm) {
+        const filteredUsers = Object.keys(userData).filter(key => {
+            const user = userData[key];
+            const nickname = user["Nickname"] || "";
+            return nickname.toLowerCase().includes(searchTerm.toLowerCase());
         });
         const filteredData = {};
-        filteredStages.forEach(key => {
-            filteredData[key] = stageData[key];
+        filteredUsers.forEach(key => {
+            filteredData[key] = userData[key];
         });
         populateTable(filteredData);
     }
 
-    // Fetch stage data
+    // Fetch user data
     try {
-        const response = await fetch("https://raw.githubusercontent.com/zombiieh/MugenKumiteStats/main/StageList.json");
-        stageData = await response.json();
-        populateTable(stageData);
+        const response = await fetch("https://raw.githubusercontent.com/zombiieh/MugenKumiteStats/main/TEST.json");
+        userData = await response.json();
+        populateTable(userData);
     } catch (error) {
-        console.error("Error fetching stage data:", error);
+        console.error("Error fetching user data:", error);
     }
 
     // Search function
     searchInput.addEventListener("keyup", function () {
         const searchTerm = this.value.trim();
-        filterStages(searchTerm);
+        filterUsers(searchTerm);
     });
 });
