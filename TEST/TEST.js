@@ -34,21 +34,23 @@ document.addEventListener("DOMContentLoaded", async (event) => {
                 characters.forEach(characterName => {
                     const charDiv = document.createElement('div');
                     charDiv.style.display = 'flex';
+                    charDiv.style.flexDirection = 'column';
                     charDiv.style.alignItems = 'center';
-                    charDiv.style.marginBottom = '5px';
-
-                    // Add character name
-                    const charName = document.createElement('span');
-                    charName.textContent = characterName;
-                    charDiv.appendChild(charName);
+                    charDiv.style.marginBottom = '10px';
 
                     // Add character image
                     const img = document.createElement('img');
-                    img.src = "res/" + characterName + ".png";
+                    img.src = "../res/" + characterName + ".png";
                     img.alt = characterName || "Character Image";
-                    img.style.maxWidth = '50px'; // Limit image size
-                    img.style.marginLeft = '10px';
+                    img.style.maxWidth = '100px'; // Larger image size
+                    img.style.marginBottom = '5px';
                     charDiv.appendChild(img);
+
+                    // Add character name below the image
+                    const charName = document.createElement('span');
+                    charName.textContent = characterName;
+                    charName.style.textAlign = 'center';
+                    charDiv.appendChild(charName);
 
                     newCellCharacters.appendChild(charDiv);
                 });
