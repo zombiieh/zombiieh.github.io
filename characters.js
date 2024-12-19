@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", async (event) => {
         tableBody.innerHTML = ''; // Clear existing table rows
 
         const tableHeader = document.createElement('tr');
-        const headerTitles = ['Char', 'Image', 'Win/Loss', 'PB'];
+        const headerTitles = ['Character', 'Image', 'Win/Loss (Ratio)', 'PB'];
         headerTitles.forEach(title => {
             const th = document.createElement('th');
             th.textContent = title;
@@ -24,6 +24,7 @@ document.addEventListener("DOMContentLoaded", async (event) => {
             // Create cell for character name
             const newCellChar = document.createElement('td');
             newCellChar.textContent = key;
+            newCellImage.style.width = "25%"; // Adjust the width
             newRow.appendChild(newCellChar);
 
             // Create cell for character image
@@ -32,6 +33,7 @@ document.addEventListener("DOMContentLoaded", async (event) => {
             img.src = "res/" + character["Picture"];
             img.alt = key;
             img.style.maxWidth = '100px'; // Limit image size
+            newCellImage.style.width = "25%"; // Adjust the width
             newCellImage.appendChild(img);
             newRow.appendChild(newCellImage);
 
@@ -43,11 +45,13 @@ document.addEventListener("DOMContentLoaded", async (event) => {
             } else {
                 newCellWinLoss.textContent = winLossText;
             }
+            newCellImage.style.width = "25%"; // Adjust the width
             newRow.appendChild(newCellWinLoss);
 
             // Create cell for PB data
             const newCellPB = document.createElement('td');
             newCellPB.textContent = character["PB_Time"];
+            newCellImage.style.width = "25%"; // Adjust the width
             newRow.appendChild(newCellPB);
 
             tableBody.appendChild(newRow);
