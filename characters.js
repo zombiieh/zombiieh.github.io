@@ -81,7 +81,6 @@ document.addEventListener("DOMContentLoaded", async (event) => {
         populateTable(filteredData);
     }
 
-    // Function to sort characters based on selected option
     function sortCharacters(sortBy) {
         const sortedCharacters = Object.fromEntries(Object.entries(characterData).sort(([, a], [, b]) => {
             switch (sortBy) {
@@ -89,12 +88,16 @@ document.addEventListener("DOMContentLoaded", async (event) => {
                     if (parseInt(a["Wins"]) !== parseInt(b["Wins"])) {
                         return parseInt(b["Wins"]) - parseInt(a["Wins"]); // Sort by wins descending
                     } else {
-                        return parseInt(a["Losses"]) - parseInt(b["Losses"]); // Sort by losses ascending
+                        return parseFloat(b["Ratio"] || 0) - parseFloat(a["Ratio"] || 0); // Sort by ratio descending
                     }
                 case "ratio":
                     const ratioA = a["Ratio"] === "N/A" ? 0 : parseFloat(a["Ratio"]);
                     const ratioB = b["Ratio"] === "N/A" ? 0 : parseFloat(b["Ratio"]);
-                    return ratioB - ratioA; // Sort by ratio descending
+                    if (ratioA !== ratioB) {
+                        return ratioB - ratioA; // Sort by ratio descending
+                    } else {
+                        return parseInt(b["Wins"]) - parseInt(a["Wins"]); // Sort by wins descending
+                    }
                 case "pb":
                     const pbA = a["PB_Time"] === "N/A" ? 1000 : parseFloat(a["PB_Time"]);
                     const pbB = b["PB_Time"] === "N/A" ? 1000 : parseFloat(b["PB_Time"]);
@@ -103,7 +106,7 @@ document.addEventListener("DOMContentLoaded", async (event) => {
                     if (parseInt(a["Losses"]) !== parseInt(b["Losses"])) {
                         return parseInt(b["Losses"]) - parseInt(a["Losses"]); // Sort by losses descending
                     } else {
-                        return parseInt(a["Wins"]) - parseInt(b["Wins"]); // Sort by wins ascending
+                        return parseFloat(b["Ratio"] || 0) - parseFloat(a["Ratio"] || 0); // Sort by ratio descending
                     }
                 default:
                     return 0;
@@ -111,6 +114,7 @@ document.addEventListener("DOMContentLoaded", async (event) => {
         }));
         populateTable(sortedCharacters);
     }
+    
 
     // Fetch character data
     try {

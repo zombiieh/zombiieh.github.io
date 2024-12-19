@@ -4,12 +4,11 @@ document.addEventListener("DOMContentLoaded", async (event) => {
     const sortSelect = document.getElementById("sort");
     let characterData = [];
 
-    // Function to populate the table
     function populateTable(characters) {
         tableBody.innerHTML = ''; // Clear existing table rows
-
+    
         const tableHeader = document.createElement('tr');
-        const headerTitles = ['Character', 'Image', 'Win/Loss (Ratio)', 'Fastest Win (PB)'];
+        const headerTitles = ['Character', 'Win/Loss (Ratio)', 'Fastest Win (PB)'];
         headerTitles.forEach(title => {
             const th = document.createElement('th');
             th.textContent = title;
@@ -17,27 +16,37 @@ document.addEventListener("DOMContentLoaded", async (event) => {
             tableHeader.appendChild(th);
         });
         tableBody.appendChild(tableHeader);
-
+    
         Object.keys(characters).forEach(key => {
             const character = characters[key];
             const newRow = document.createElement('tr');
+    
+            // Create a combined cell for character name and image
+            const newCellCharImage = document.createElement('td');
+            newCellCharImage.style.display = "flex";
+            newCellCharImage.style.alignItems = "center"; // Vertically center items
+            newCellCharImage.style.justifyContent = "center"; // Horizontally center items
+            newCellCharImage.style.gap = "10px"; // Add spacing between the image and text
+            newCellCharImage.style.textAlign = "center"; // Ensure text is centered
 
-            // Create cell for character name
-            const newCellChar = document.createElement('td');
-            newCellChar.textContent = key;
-            newCellChar.style.width = "25%"; // Adjust the width
-            newRow.appendChild(newCellChar);
-
-            // Create cell for character image
-            const newCellImage = document.createElement('td');
+            // Add character image
             const img = document.createElement('img');
             img.src = "res/" + character["Picture"];
             img.alt = key;
-            img.style.maxWidth = '100px'; // Limit image size
-            newCellImage.style.width = "25%"; // Adjust the width
-            newCellImage.appendChild(img);
-            newRow.appendChild(newCellImage);
+            img.style.maxWidth = '100px'; // Adjust the size of the image
+            img.style.flexShrink = "0"; // Prevent the image from shrinking
+            newCellCharImage.appendChild(img);
 
+            // Add character name
+            const charName = document.createElement('span');
+            charName.textContent = key;
+            charName.style.whiteSpace = "nowrap"; // Prevent text from wrapping
+            charName.style.flexShrink = "0"; // Prevent text from shrinking
+            newCellCharImage.appendChild(charName);
+
+            newRow.appendChild(newCellCharImage);
+
+    
             // Create cell for win/loss data
             const newCellWinLoss = document.createElement('td');
             const winLossText = `${character["Wins"]} W - ${character["Losses"]} L`;
@@ -48,16 +57,17 @@ document.addEventListener("DOMContentLoaded", async (event) => {
             }
             newCellWinLoss.style.width = "25%"; // Adjust the width
             newRow.appendChild(newCellWinLoss);
-
+    
             // Create cell for PB data
             const newCellPB = document.createElement('td');
             newCellPB.textContent = character["PB_Time"];
             newCellPB.style.width = "25%"; // Adjust the width
             newRow.appendChild(newCellPB);
-
+    
             tableBody.appendChild(newRow);
         });
     }
+    
 
     // Function to filter characters based on search term
     function filterCharacters(searchTerm) {
