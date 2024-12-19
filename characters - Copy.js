@@ -9,10 +9,11 @@ document.addEventListener("DOMContentLoaded", async (event) => {
         tableBody.innerHTML = ''; // Clear existing table rows
 
         const tableHeader = document.createElement('tr');
-        const headerTitles = ['Char', 'Image', 'Win/Loss', 'PB'];
+        const headerTitles = ['Character', 'Image', 'Win/Loss (Ratio)', 'Fastest Win (PB)'];
         headerTitles.forEach(title => {
             const th = document.createElement('th');
             th.textContent = title;
+            th.style.fontSize = "32px"; // Adjust the text size
             tableHeader.appendChild(th);
         });
         tableBody.appendChild(tableHeader);
@@ -24,6 +25,7 @@ document.addEventListener("DOMContentLoaded", async (event) => {
             // Create cell for character name
             const newCellChar = document.createElement('td');
             newCellChar.textContent = key;
+            newCellChar.style.width = "25%"; // Adjust the width
             newRow.appendChild(newCellChar);
 
             // Create cell for character image
@@ -32,6 +34,7 @@ document.addEventListener("DOMContentLoaded", async (event) => {
             img.src = "res/" + character["Picture"];
             img.alt = key;
             img.style.maxWidth = '100px'; // Limit image size
+            newCellImage.style.width = "25%"; // Adjust the width
             newCellImage.appendChild(img);
             newRow.appendChild(newCellImage);
 
@@ -43,11 +46,13 @@ document.addEventListener("DOMContentLoaded", async (event) => {
             } else {
                 newCellWinLoss.textContent = winLossText;
             }
+            newCellWinLoss.style.width = "25%"; // Adjust the width
             newRow.appendChild(newCellWinLoss);
 
             // Create cell for PB data
             const newCellPB = document.createElement('td');
             newCellPB.textContent = character["PB_Time"];
+            newCellPB.style.width = "25%"; // Adjust the width
             newRow.appendChild(newCellPB);
 
             tableBody.appendChild(newRow);
@@ -71,19 +76,16 @@ document.addEventListener("DOMContentLoaded", async (event) => {
         const sortedCharacters = Object.fromEntries(Object.entries(characterData).sort(([, a], [, b]) => {
             switch (sortBy) {
                 case "wins":
-                    // Sort by wins, if wins are equal, sort by losses
                     if (parseInt(a["Wins"]) !== parseInt(b["Wins"])) {
                         return parseInt(b["Wins"]) - parseInt(a["Wins"]); // Sort by wins descending
                     } else {
                         return parseInt(a["Losses"]) - parseInt(b["Losses"]); // Sort by losses ascending
                     }
                 case "ratio":
-                    // Sort by ratio
                     const ratioA = a["Ratio"] === "N/A" ? 0 : parseFloat(a["Ratio"]);
                     const ratioB = b["Ratio"] === "N/A" ? 0 : parseFloat(b["Ratio"]);
                     return ratioB - ratioA; // Sort by ratio descending
                 case "pb":
-                    // Sort by PB (assuming lower time is better)
                     const pbA = a["PB_Time"] === "N/A" ? 1000 : parseFloat(a["PB_Time"]);
                     const pbB = b["PB_Time"] === "N/A" ? 1000 : parseFloat(b["PB_Time"]);
                     return pbA - pbB; // Sort by PB ascending
@@ -105,7 +107,9 @@ document.addEventListener("DOMContentLoaded", async (event) => {
         const response = await fetch("https://raw.githubusercontent.com/zombiieh/MugenKumiteStats/main/CharList.json");
         characterData = await response.json();
         console.log(characterData);
-        populateTable(characterData);
+
+        // Sort by "ratio" after fetching data and populate the table
+        sortCharacters("ratio");
     } catch (error) {
         console.error("Error fetching character data:", error);
     }
