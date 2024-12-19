@@ -38,7 +38,6 @@ function populateTable(characters) {
         const newCellCharImage = document.createElement('td');
         newCellCharImage.style.display = "flex";
         newCellCharImage.style.alignItems = "center";
-        newCellCharImage.style.justifyContent = "center"; // Center the content horizontally
         newCellCharImage.style.gap = "10px"; // Add spacing between the image and text
 
         const img = document.createElement('img');
@@ -47,24 +46,10 @@ function populateTable(characters) {
         img.style.maxWidth = '100px'; // Adjust the size of the image
         newCellCharImage.appendChild(img);
 
-        // Add character name
         const charName = document.createElement('span');
         charName.textContent = key;
-
-        // Make the character name bold
-        charName.style.fontWeight = "bold";
-
-        // Check if the character name includes "(Showcase only)"
-        if (key.includes("(Showcase only)")) {
-            charName.style.color = "blue"; // Set color to blue
-        } else {
-            // Apply ratio-based coloring for other characters
-            const ratio = character["Ratio"] === "N/A" ? 0 : parseFloat(character["Ratio"]);
-            const colorValue = Math.max(0, Math.min(255, Math.floor((ratio / 100) * 255)));
-            charName.style.color = `rgb(255, ${255 - colorValue}, 0)`; // Color transition from red to yellow
-        }
-
         newCellCharImage.appendChild(charName);
+
         newRow.appendChild(newCellCharImage);
 
         // Create cell for win/loss data
@@ -83,15 +68,11 @@ function populateTable(characters) {
         const newCellPB = document.createElement('td');
         newCellPB.textContent = character["PB_Time"];
         newCellPB.style.width = "25%"; // Adjust the width
-        //newCellPB.style.color = `rgb(0,0,0)`;
-        
         newRow.appendChild(newCellPB);
 
         tableBody.appendChild(newRow);
     });
 }
-
-
 
 
 
