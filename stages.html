@@ -24,18 +24,22 @@
             object-fit: fill; /* Ensure the image scales properly without stretching */
         }
 
-        /* Search and Sort Box */
+        /* Ensure search-sort-box is displayed as a single line */
         .search-sort-box {
-            display: flex; /* Flexbox layout */
-            justify-content: space-between; /* Space between button container and inputs */
-            align-items: center; /* Center vertically */
+            display: flex;
+            justify-content: space-between; /* Distribute space between left, center, and right */
+            align-items: center;
             margin-top: 1rem;
             padding: 0.5rem;
+            width: 100%; /* Ensure the container takes up full width */
+            box-sizing: border-box; /* Include padding in the width calculation */
         }
 
+        /* Button container aligned to the left */
         .button-container {
-            display: flex; /* Align buttons in a row */
-            gap: 0.5rem; /* Space between buttons */
+            display: flex;
+            gap: 0.5rem;
+            justify-content: flex-start; /* Align buttons to the left */
         }
 
         .search-sort-box button {
@@ -54,13 +58,27 @@
                 color: #444; /* Change text color when hovered */
             }
 
+        /* Search and Sort inputs centered */
         .search-sort-inputs {
-            display: flex; /* Align search input and select in a row */
-            justify-content: center; /* Center search and sort inputs */
-            align-items: center; /* Vertically center the elements */
-            gap: 1rem; /* Space between the search input and the sort select */
-            flex-grow: 1; /* Allow it to take up remaining space */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0.5rem;
+            flex-grow: 1; /* Allow it to take remaining space */
+            min-width: 0; /* Prevent wrapping */
         }
+            /* Optionally adjust the width of both input and select to fit them closer together */
+            .search-sort-inputs input,
+            .search-sort-inputs select {
+                padding: 0.5rem;
+                font-size: 1rem;
+                border: 1px solid #C29C53;
+                background-color: #444;
+                color: #C29C53;
+                border-radius: 5px;
+                margin: 0;
+                max-width: 200px; /* Adjust max-width to allow both to fit better */
+            }
 
             /* Style for input and select */
             .search-sort-inputs input, .search-sort-inputs select {
@@ -74,48 +92,46 @@
                 max-width: 300px; /* Prevent too wide inputs */
             }
 
-        /* Ensure buttons and input elements align properly */
+        /* Links container aligned to the right */
+        .links-container {
+            display: flex;
+            gap: 0.5rem;
+            justify-content: flex-end; /* Align links to the right */
+            margin-right: 10px; /* Add margin to the right to move it away from the edge */
+        }
+
+        /* Ensure responsive adjustments on smaller screens */
         @media (max-width: 768px) {
             .search-sort-box {
-                flex-direction: column; /* Stack the buttons and inputs vertically on smaller screens */
-                align-items: center; /* Center everything */
-            }
-
-            .button-container {
-                gap: 1rem; /* Space between buttons */
+                flex-direction: column;
+                align-items: center;
             }
 
             .search-sort-inputs {
-                flex-direction: column; /* Stack the inputs vertically */
-                gap: 1rem; /* Space between the search and sort inputs */
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .links-container {
+                flex-direction: column;
+                gap: 1rem;
             }
 
             .search-sort-box button {
-                margin-right: 0; /* Remove right margin */
+                width: 100%; /* Full width on smaller screens */
             }
         }
 
-        .links-container {
-            display: flex;
-            gap: 0.5rem; /* Space between the links */
-            align-items: center; /* Center align with other elements */
-            margin-left: auto; /* Push the links to the right */
+        .links-container .link {
+            width: 150px; /* Set icon size */
+            height: 30px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
         }
 
-            .links-container .link {
-                width: 150px; /* Set icon size */
-                height: 30px;
-                cursor: pointer;
-                transition: transform 0.3s ease;
+            .links-container .link:hover {
+                transform: scale(1.1); /* Slightly enlarge on hover */
             }
-
-                .links-container .link:hover {
-                    transform: scale(1.1); /* Slightly enlarge on hover */
-                }
-
-
-
-
 
 
         /* Use CSS Grid for Character Cards */
