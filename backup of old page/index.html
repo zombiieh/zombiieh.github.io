@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<!-- saved from url=(0043)file:///P:/stream/MugenKumite/CharList.html -->
+<html>
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+  <link href="styles.css" rel="stylesheet">
+  <script src="characters.js"></script>
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap"
+    rel="stylesheet">
+  <title>Mugen Kumite Character List</title>
+</head>
+
+<body>
+  <header>
+    <div id="branding">
+      <img id="logo" src="logo.png">
+      <span id="head-title">Mugen Kumite</span>
+    </div>
+
+
+    <div id="links">
+      <a href="https://github.com/zombiieh/zombiieh.github.io" rel="noreferrer noopener" target="_blank"><img
+          class="link" src="source.svg"></a>
+      <a href="https://discord.gg/GrdZRfuSUy" rel="noreferrer noopener" target="_blank"><img class="link"
+          src="discord.svg"></a>
+      <a href="https://www.twitch.tv/mugenkumite" rel="noreferrer noopener" target="_blank"><img class="link"
+          src="twitch.svg"></a>
+    </div>
+
+  </header>
+
+  <div id="tabs">
+   <a href="/">
+     <button>Characters</button>
+    </a>
+    <a href="/stages">
+      <button>Stages</button>
+    </a>
+    <a href="/TEST">
+      <button>TEST</button>
+    </a>
+  </div>
+
+
+  <div id="table-inputs">
+    <input type="text" id="searchInput" placeholder="Character Name">
+    <select id="sort" name="sort">
+      <option value="name">Name</option>
+      <option value="pb">PB</option>
+      <option value="wins">Wins</option>
+      <option value="loss">Loss</option>
+      <option value="ratio" selected>Ratio</option> <!-- Set this option as the default -->
+    </select>
+  </div>
+
+  <table>
+    <tbody>
+      <tr>
+        <th id="top-cell-left">Char</th>
+        <th>Image</th>
+        <th>Win/Loss</th>
+        <th id="top-cell-right">PB</th>
+      </tr>
+    </tbody>
+  </table>
+</body>
+
+</html>

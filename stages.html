@@ -94,6 +94,7 @@
                 margin-right: 0; /* Remove right margin */
             }
         }
+
         .links-container {
             display: flex;
             gap: 0.5rem; /* Space between the links */
@@ -131,16 +132,18 @@
         .character-card {
             display: flex; /* Use flexbox for easy alignment */
             flex-direction: column; /* Stack the elements vertically */
-            align-items: center; /* Center name and image horizontally */
+            align-items: center; /* Center elements horizontally */
+            justify-content: center; /* Center elements vertically */
             background: rgba(68, 68, 68, 0.8); /* Semi-transparent background for better readability */
             border: 2px solid #C29C53; /* Golden border */
             border-radius: 5px;
             padding: 0.5rem;
-            text-align: left; /* Align text to the left for stats */
+            text-align: center; /* Center the text inside the card */
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2); /* Add subtle shadow for depth */
             transition: transform 0.3s ease, box-shadow 0.3s ease;
-            width: 200px; /* Set the width to 200px */
+            width: 200px; /* Set the width of the card */
         }
+
 
             /* Image styles (resizing to 150px) */
             .character-card img {
@@ -158,7 +161,12 @@
                 color: #C29C53;
                 font-weight: bold;
                 text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5); /* Text shadow for better readability */
+                word-wrap: break-word; /* Allows long words to break and wrap onto the next line */
+                white-space: normal; /* Ensures the text wraps normally */
+                width: 100%; /* Ensures the heading takes up the full width of the card */
+                text-align: center; /* Center the heading text */
             }
+
 
             /* Style for text inside the cards (Wins, Losses, Ratio, etc.) */
             .character-card .stats p {
@@ -199,14 +207,7 @@
 
         <!-- Search and sort inputs -->
         <div class="search-sort-inputs">
-            <input type="text" id="search-input" placeholder="Search by Character Name..." onkeyup="searchCharacter()">
-            <select id="sort-select" onchange="sortCharacters()">
-                <option value="ratio">Sort by Ratio</option>
-                <option value="wins">Sort by Wins</option>
-                <option value="losses">Sort by Losses</option>
-                <option value="name">Sort by Name</option>
-                <option value="pb">Sort by PB</option>
-            </select>
+            <input type="text" id="search-input" placeholder="Search by Stage Name..." onkeyup="searchCharacter()">
         </div>
 
         <!-- Links container -->
@@ -231,10 +232,10 @@
 
     <script>
         // Correct base URL for images hosted on GitHub Pages
-        const baseImageUrl = "./res/";
+        const baseImageUrl = "./res/stages/";
 
         // Fetch the character data from the JSON file
-        fetch('https://raw.githubusercontent.com/zombiieh/MugenKumiteStats/main/CharList.json')
+        fetch('https://raw.githubusercontent.com/zombiieh/MugenKumiteStats/main/StageList.json')
             .then(response => response.json())
             .then(data => {
                 const characterList = document.getElementById('character-list');
@@ -252,15 +253,9 @@
 
                     // Populate the card with character data
                     card.innerHTML = `
-                                                    <h3>${name}</h3>
-                                                    <img src="${imagePath}" alt="${name}">
-                                                    <div class="stats">
-                                                        <p><strong>Wins:</strong> ${stats.Wins}</p>
-                                                        <p><strong>Losses:</strong> ${stats.Losses}</p>
-                                                        <p><strong>Ratio:</strong> ${stats.Ratio}%</p>
-                                                        <p><strong>PB:</strong> ${stats.PB_Time}</p>
-                                                    </div>
-                                                `;
+                                                        <h3>${name}</h3>
+                                                        <img src="${imagePath}" alt="${name}">
+                                                    `;
                     characterList.appendChild(card);
                 }
 
@@ -322,15 +317,15 @@
 
                         const imagePath = `${baseImageUrl}${character.stats.Picture}`;
                         card.innerHTML = `
-                                                        <h3>${character.name}</h3>
-                                                        <img src="${imagePath}" alt="${character.name}">
-                                                        <div class="stats">
-                                                            <p><strong>Wins:</strong> ${character.stats.Wins}</p>
-                                                            <p><strong>Losses:</strong> ${character.stats.Losses}</p>
-                                                            <p><strong>Ratio:</strong> ${character.stats.Ratio}%</p>
-                                                            <p><strong>PB:</strong> ${character.stats.PB_Time}</p>
-                                                        </div>
-                                                    `;
+                                                            <h3>${character.name}</h3>
+                                                            <img src="${imagePath}" alt="${character.name}">
+                                                            <div class="stats">
+                                                                <p><strong>Wins:</strong> ${character.stats.Wins}</p>
+                                                                <p><strong>Losses:</strong> ${character.stats.Losses}</p>
+                                                                <p><strong>Ratio:</strong> ${character.stats.Ratio}%</p>
+                                                                <p><strong>PB:</strong> ${character.stats.PB_Time}</p>
+                                                            </div>
+                                                        `;
                         characterList.appendChild(card);
                     });
                 }

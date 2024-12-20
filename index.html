@@ -1,74 +1,346 @@
 <!DOCTYPE html>
-<!-- saved from url=(0043)file:///P:/stream/MugenKumite/CharList.html -->
-<html>
-
+<html lang="en">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mugen Kumite</title>
+    <style>
+        /* Body Background and Text Color */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url('background.jpg'); /* Set background image */
+            background-size: cover; /* Ensure the background covers the entire page */
+            background-position: center; /* Center the background image */
+            color: #C29C53; /* Text color */
+        }
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
-  <link href="styles.css" rel="stylesheet">
-  <script src="characters.js"></script>
-  <link
-    href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap"
-    rel="stylesheet">
-  <title>Mugen Kumite Character List</title>
+        /* Banner Image Styles */
+        .banner {
+            display: block;
+            width: 100%;
+            height: 80px; /* Set the height for the banner */
+            object-fit: fill; /* Ensure the image scales properly without stretching */
+        }
+
+        /* Search and Sort Box */
+        .search-sort-box {
+            display: flex; /* Flexbox layout */
+            justify-content: space-between; /* Space between button container and inputs */
+            align-items: center; /* Center vertically */
+            margin-top: 1rem;
+            padding: 0.5rem;
+        }
+
+        .button-container {
+            display: flex; /* Align buttons in a row */
+            gap: 0.5rem; /* Space between buttons */
+        }
+
+        .search-sort-box button {
+            background-color: #444; /* Button background color */
+            color: #DDA344; /* Button text color */
+            font-size: 1rem;
+            padding: 0.5rem 1rem;
+            border: 1px solid #C29C53; /* Same border as input */
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+            .search-sort-box button:hover {
+                background-color: #C29C53; /* Change button background on hover */
+                color: #444; /* Change text color when hovered */
+            }
+
+        .search-sort-inputs {
+            display: flex; /* Align search input and select in a row */
+            justify-content: center; /* Center search and sort inputs */
+            align-items: center; /* Vertically center the elements */
+            gap: 1rem; /* Space between the search input and the sort select */
+            flex-grow: 1; /* Allow it to take up remaining space */
+        }
+
+            /* Style for input and select */
+            .search-sort-inputs input, .search-sort-inputs select {
+                padding: 0.5rem;
+                font-size: 1rem;
+                border: 1px solid #C29C53;
+                background-color: #444;
+                color: #C29C53;
+                border-radius: 5px;
+                margin: 0; /* Remove margin for alignment */
+                max-width: 300px; /* Prevent too wide inputs */
+            }
+
+        /* Ensure buttons and input elements align properly */
+        @media (max-width: 768px) {
+            .search-sort-box {
+                flex-direction: column; /* Stack the buttons and inputs vertically on smaller screens */
+                align-items: center; /* Center everything */
+            }
+
+            .button-container {
+                gap: 1rem; /* Space between buttons */
+            }
+
+            .search-sort-inputs {
+                flex-direction: column; /* Stack the inputs vertically */
+                gap: 1rem; /* Space between the search and sort inputs */
+            }
+
+            .search-sort-box button {
+                margin-right: 0; /* Remove right margin */
+            }
+        }
+        .links-container {
+            display: flex;
+            gap: 0.5rem; /* Space between the links */
+            align-items: center; /* Center align with other elements */
+            margin-left: auto; /* Push the links to the right */
+        }
+
+            .links-container .link {
+                width: 150px; /* Set icon size */
+                height: 30px;
+                cursor: pointer;
+                transition: transform 0.3s ease;
+            }
+
+                .links-container .link:hover {
+                    transform: scale(1.1); /* Slightly enlarge on hover */
+                }
+
+
+
+
+
+
+        /* Use CSS Grid for Character Cards */
+        .character-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); /* Responsive grid */
+            gap: 1rem 0.1rem; /* 1rem horizontal gap, 2rem vertical gap */
+            padding: 1rem;
+            justify-items: center; /* Center cards horizontally */
+        }
+
+
+        /* Styles for individual character cards */
+        .character-card {
+            display: flex; /* Use flexbox for easy alignment */
+            flex-direction: column; /* Stack the elements vertically */
+            align-items: center; /* Center name and image horizontally */
+            background: rgba(68, 68, 68, 0.8); /* Semi-transparent background for better readability */
+            border: 2px solid #C29C53; /* Golden border */
+            border-radius: 5px;
+            padding: 0.5rem;
+            text-align: left; /* Align text to the left for stats */
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2); /* Add subtle shadow for depth */
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            width: 200px; /* Set the width to 200px */
+        }
+
+            /* Image styles (resizing to 150px) */
+            .character-card img {
+                width: 150px; /* Set width to 150px */
+                height: 150px; /* Set height to 150px */
+                object-fit: cover; /* Ensure the image covers the area without distorting */
+                border-radius: 5px;
+                margin-bottom: 0.5rem; /* Add space between image and name */
+            }
+
+            /* Card Heading (Character Name) */
+            .character-card h3 {
+                margin: 0.5rem 0;
+                font-size: 1.2rem;
+                color: #C29C53;
+                font-weight: bold;
+                text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5); /* Text shadow for better readability */
+            }
+
+            /* Style for text inside the cards (Wins, Losses, Ratio, etc.) */
+            .character-card .stats p {
+                display: flex;
+                justify-content: space-between; /* Label on the left, value on the right */
+                margin: 0.25rem 0px; /* Reduced space between the stats */
+                font-size: 0.9rem; /* Smaller font size for stats */
+                color: #C29C53;
+                text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5); /* Text shadow */
+                font-weight: bold; /* Apply bold style to labels and values */
+            }
+
+                .character-card .stats p strong {
+                    margin-right: 4.5rem; /* Add space between the text and value */
+                }
+
+            /* Hover Effect for Character Cards */
+            .character-card:hover {
+                transform: scale(1.05); /* Slightly scale up the card on hover */
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* Increase shadow on hover */
+            }
+    </style>
 </head>
-
 <body>
-  <header>
-    <div id="branding">
-      <img id="logo" src="logo.png">
-      <span id="head-title">Mugen Kumite</span>
+    <!-- Banner Image -->
+    <img src="bannerCUT.png" alt="Banner Image" class="banner">
+
+    <div class="search-sort-box">
+        <!-- Button container -->
+        <div class="button-container">
+            <a href="index.html">
+                <button id="characters-btn">Characters</button>
+            </a>
+            <a href="stages.html">
+                <button id="stages-btn">Stages</button>
+            </a>
+        </div>
+
+        <!-- Search and sort inputs -->
+        <div class="search-sort-inputs">
+            <input type="text" id="search-input" placeholder="Search by Character Name..." onkeyup="searchCharacter()">
+            <select id="sort-select" onchange="sortCharacters()">
+                <option value="ratio">Sort by Ratio</option>
+                <option value="wins">Sort by Wins</option>
+                <option value="losses">Sort by Losses</option>
+                <option value="name">Sort by Name</option>
+                <option value="pb">Sort by PB</option>
+            </select>
+        </div>
+
+        <!-- Links container -->
+        <div class="links-container">
+            <a href="https://www.twitch.tv/mugenkumite" rel="noreferrer noopener" target="_blank">
+                <img class="link" src="twitchbutton.png" alt="Twitch">
+            </a>
+            <a href="https://discord.gg/GrdZRfuSUy" rel="noreferrer noopener" target="_blank">
+                <img class="link" src="discordbutton.png" alt="Discord">
+            </a>
+        </div>
     </div>
 
 
-    <div id="links">
-      <a href="https://github.com/zombiieh/zombiieh.github.io" rel="noreferrer noopener" target="_blank"><img
-          class="link" src="source.svg"></a>
-      <a href="https://discord.gg/GrdZRfuSUy" rel="noreferrer noopener" target="_blank"><img class="link"
-          src="discord.svg"></a>
-      <a href="https://www.twitch.tv/mugenkumite" rel="noreferrer noopener" target="_blank"><img class="link"
-          src="twitch.svg"></a>
+
+
+
+
+    <div class="character-list" id="character-list">
+        <!-- Character cards will be dynamically inserted here -->
     </div>
 
-  </header>
+    <script>
+        // Correct base URL for images hosted on GitHub Pages
+        const baseImageUrl = "./res/";
 
-  <div id="tabs">
-   <a href="/">
-     <button>Characters</button>
-    </a>
-    <a href="/stages">
-      <button>Stages</button>
-    </a>
-    <a href="/TEST">
-      <button>TEST</button>
-    </a>
-  </div>
+        // Fetch the character data from the JSON file
+        fetch('https://raw.githubusercontent.com/zombiieh/MugenKumiteStats/main/CharList.json')
+            .then(response => response.json())
+            .then(data => {
+                const characterList = document.getElementById('character-list');
+                const characters = []; // Array to hold character data
 
+                // Store all characters in the array and generate the cards
+                for (const [name, stats] of Object.entries(data)) {
+                    characters.push({ name, stats });
 
-  <div id="table-inputs">
-    <input type="text" id="searchInput" placeholder="Character Name">
-    <select id="sort" name="sort">
-      <option value="name">Name</option>
-      <option value="pb">PB</option>
-      <option value="wins">Wins</option>
-      <option value="loss">Loss</option>
-      <option value="ratio" selected>Ratio</option> <!-- Set this option as the default -->
-    </select>
-  </div>
+                    const card = document.createElement('div');
+                    card.className = 'character-card';
 
-  <table>
-    <tbody>
-      <tr>
-        <th id="top-cell-left">Char</th>
-        <th>Image</th>
-        <th>Win/Loss</th>
-        <th id="top-cell-right">PB</th>
-      </tr>
-    </tbody>
-  </table>
+                    // Construct the correct image path
+                    const imagePath = `${baseImageUrl}${stats.Picture}`;
+
+                    // Populate the card with character data
+                    card.innerHTML = `
+                                                    <h3>${name}</h3>
+                                                    <img src="${imagePath}" alt="${name}">
+                                                    <div class="stats">
+                                                        <p><strong>Wins:</strong> ${stats.Wins}</p>
+                                                        <p><strong>Losses:</strong> ${stats.Losses}</p>
+                                                        <p><strong>Ratio:</strong> ${stats.Ratio}%</p>
+                                                        <p><strong>PB:</strong> ${stats.PB_Time}</p>
+                                                    </div>
+                                                `;
+                    characterList.appendChild(card);
+                }
+
+                // Function to filter characters based on the search input
+                window.searchCharacter = function () {
+                    const searchQuery = document.getElementById('search-input').value.toLowerCase();
+                    const filteredCharacters = characters.filter(character => character.name.toLowerCase().includes(searchQuery));
+
+                    // Clear the existing cards
+                    characterList.innerHTML = '';
+
+                    // Render the filtered characters
+                    renderCharacters(filteredCharacters);
+                };
+
+                // Function to sort characters based on the selected option
+                window.sortCharacters = function () {
+                    const sortBy = document.getElementById('sort-select').value;
+                    let sortedCharacters;
+
+                    switch (sortBy) {
+                        case 'name':
+                            sortedCharacters = characters.sort((a, b) => a.name.localeCompare(b.name));
+                            break;
+                        case 'wins':
+                            sortedCharacters = characters.sort((a, b) => b.stats.Wins - a.stats.Wins);
+                            break;
+                        case 'losses':
+                            sortedCharacters = characters.sort((a, b) => b.stats.Losses - a.stats.Losses);
+                            break;
+                        case 'ratio':
+                            sortedCharacters = characters.sort((a, b) => {
+                                if (b.stats.Ratio === a.stats.Ratio) {
+                                    return b.stats.Wins - a.stats.Wins; // If Ratio is the same, compare Wins
+                                }
+                                return b.stats.Ratio - a.stats.Ratio; // Otherwise, sort by Ratio
+                            });
+                            break;
+                        case 'pb':
+                            sortedCharacters = characters.sort((a, b) => parseFloat(a.stats.PB_Time) - parseFloat(b.stats.PB_Time));
+                            break;
+                        default:
+                            sortedCharacters = characters;
+                            break;
+                    }
+
+                    // Clear the existing cards
+                    characterList.innerHTML = '';
+
+                    // Render the sorted characters
+                    renderCharacters(sortedCharacters);
+                };
+
+                // Function to render the character cards
+                function renderCharacters(characters) {
+                    characters.forEach(character => {
+                        const card = document.createElement('div');
+                        card.className = 'character-card';
+
+                        const imagePath = `${baseImageUrl}${character.stats.Picture}`;
+                        card.innerHTML = `
+                                                        <h3>${character.name}</h3>
+                                                        <img src="${imagePath}" alt="${character.name}">
+                                                        <div class="stats">
+                                                            <p><strong>Wins:</strong> ${character.stats.Wins}</p>
+                                                            <p><strong>Losses:</strong> ${character.stats.Losses}</p>
+                                                            <p><strong>Ratio:</strong> ${character.stats.Ratio}%</p>
+                                                            <p><strong>PB:</strong> ${character.stats.PB_Time}</p>
+                                                        </div>
+                                                    `;
+                        characterList.appendChild(card);
+                    });
+                }
+
+                // Initial sort by "Ratio" and "Wins"
+                sortCharacters();
+            })
+            .catch(error => {
+                console.error('Error fetching character data:', error);
+            });
+    </script>
 </body>
-
 </html>
