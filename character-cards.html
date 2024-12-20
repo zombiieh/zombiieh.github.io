@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Character Statistics</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 1rem 0;
+        }
+
+        .character-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .character-card {
+            background: #fff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin: 1rem;
+            padding: 1rem;
+            width: 250px;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+            .character-card img {
+                max-width: 100%;
+                border-radius: 5px;
+            }
+
+            .character-card h3 {
+                margin: 0.5rem 0;
+            }
+
+            .character-card p {
+                margin: 0.5rem 0;
+                font-size: 0.9rem;
+                color: #555;
+            }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Character Statistics</h1>
+    </header>
+    <div class="character-list" id="character-list">
+        <!-- Character cards will be dynamically inserted here -->
+    </div>
+    <script>
+        // Base URL for the images
+        const baseImageUrl = "https://raw.githubusercontent.com/zombiieh/MugenKumiteStats/main/";
+
+        // Fetch the character data from the JSON file
+        fetch('https://raw.githubusercontent.com/zombiieh/MugenKumiteStats/main/CharList.json')
+            .then(response => response.json())
+            .then(data => {
+                const characterList = document.getElementById('character-list');
+
+                // Iterate through the JSON object
+                for (const [name, stats] of Object.entries(data)) {
+                    const card = document.createElement('div');
+                    card.className = 'character-card';
+
+                    // Populate the card with character data
+                    card.innerHTML = `
+                            <img src="${baseImageUrl + stats.Picture}" alt="${name}">
+                            <h3>${name}</h3>
+                            <p><strong>Wins:</strong> ${stats.Wins}</p>
+                            <p><strong>Losses:</strong> ${stats.Losses}</p>
+                            <p><strong>Ratio:</strong> ${stats.Ratio}%</p>
+                            <p><strong>PB:</strong> ${stats.PB_Time}</p>
+                        `;
+                    characterList.appendChild(card);
+                }
+            })
+            .catch(error => {
+                console.error('Error fetching character data:', error);
+            });
+    </script>
+</body>
+</html>
